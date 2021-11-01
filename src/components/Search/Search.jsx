@@ -7,9 +7,9 @@ const Search = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${state.searchTerm}&units=metric&appid=c73aa228bfba692462f96e89080aa39a`
-    )
+    const url = `http://api.openweathermap.org/data/2.5/forecast?${state.searchCategory === 'zip' ? 'id' : 'q'}=${state.searchTerm}&units=metric&appid=c73aa228bfba692462f96e89080aa39a`
+    
+    fetch(url)
       .then((res) => res.json())
       .then((res) => {
         dispatch(getData(res));
