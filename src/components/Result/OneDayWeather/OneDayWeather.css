@@ -1,0 +1,8 @@
+.one-day-weather{
+    width: fit-content;
+    margin: auto;
+}
+
+.active-day{
+    border: 1px solid gray;
+}
