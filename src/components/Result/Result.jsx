@@ -30,8 +30,6 @@ const Result = () => {
   const humidity = searchResult.list[0].main.humidity;
   const windSpeed = searchResult.list[0].wind.speed;
 
-  console.log(searchResult);
-
   return (
     <div className="result">
       <div className="top-container">
@@ -44,7 +42,11 @@ const Result = () => {
 
       <div className="middle-container">
         <div className="temp-container">
-          <img className="weather-icon" src={`http://openweathermap.org/img/w/${icon}.png`} alt="weather icon" />
+          <img
+            className="weather-icon"
+            src={`http://openweathermap.org/img/w/${icon}.png`}
+            alt="weather icon"
+          />
           <span className="temp-digit">{temp}</span>
           <span
             className={`temp-unit ${isUnitCelsius ? "active-temp-unit" : null}`}

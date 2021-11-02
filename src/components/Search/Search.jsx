@@ -33,11 +33,15 @@ const Search = () => {
       <input
         type="text"
         className="search-field"
-        placeholder={`Search ${state.searchCategory !== "zip" ? "City" : "Zip Code"}...`}
+        placeholder={`Search ${
+          state.searchCategory !== "zip" ? "City" : "Zip Code"
+        }...`}
         onChange={(e) => dispatch(changeTerm(e.target.value))}
       />
 
-      <button className="search-btn" onClick={handleSubmit}>Search</button>
+      <button className="search-btn" onClick={handleSubmit}>
+        Search
+      </button>
     </div>
   );
 };
