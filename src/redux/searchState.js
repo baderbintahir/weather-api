@@ -4,6 +4,7 @@ const initialState = {
   searchCategory: "",
   searchTerm: "",
   searchResult: {},
+  activeDay: 0,
 };
 
 export const searchSlice = createSlice({
@@ -19,10 +20,14 @@ export const searchSlice = createSlice({
     getData: (state, action) => {
       state.searchResult = action.payload;
     },
+    changeActiveDay: (state, action) => {
+      state.activeDay = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { changeCategory, changeTerm, getData } = searchSlice.actions;
+export const { changeCategory, changeTerm, getData, changeActiveDay } =
+  searchSlice.actions;
 
 export default searchSlice.reducer;

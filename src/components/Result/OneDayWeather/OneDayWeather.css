@@ -1,6 +1,7 @@
 .one-day-weather{
     width: fit-content;
     margin: auto;
+    cursor: pointer;
 }
 
 .active-day{
