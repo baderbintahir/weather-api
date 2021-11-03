@@ -1,0 +1,14 @@
+.map-container {
+    width: 96%;
+    height: 96%;
+    padding: 2%;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+canvas{
+    width: 100% !important;
+}
+
+.mapboxgl-control-container{
+    display: none;
+}
