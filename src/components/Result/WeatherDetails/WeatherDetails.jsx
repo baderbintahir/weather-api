@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const WeatherDetails = (props) => {
-  const [isUnitCelsius, setIsUnitCelsius] = useState(true);
+  const [isCelsius, setIsCelsius] = useState(true);
   const searchState = useSelector((state) => state.searchState);
   const searchResult = searchState.searchResult;
   const day = props.dateToDay(searchResult.list[searchState.activeDay * 8].dt_txt);
@@ -13,7 +13,7 @@ const WeatherDetails = (props) => {
   const humidity = searchResult.list[searchState.activeDay * 8].main.humidity;
   const windSpeed = searchResult.list[searchState.activeDay * 8].wind.speed;
   let temp = searchResult.list[searchState.activeDay * 8].main.temp;
-  temp = isUnitCelsius ? temp : ((temp * 9) / 5 + 32).toFixed(2);
+  temp = isCelsius ? temp : ((temp * 9) / 5 + 32).toFixed(2);
 
   return (
     <div className="weather-details">
@@ -34,15 +34,15 @@ const WeatherDetails = (props) => {
           />
           <span className="temp-digit">{temp}</span>
           <span
-            className={`temp-unit ${isUnitCelsius ? "active-temp-unit" : null}`}
-            onClick={() => setIsUnitCelsius(true)}
+            className={`temp-unit ${isCelsius ? "active-temp-unit" : null}`}
+            onClick={() => setIsCelsius(true)}
           >
             °C{" "}
           </span>
           <span className="temp-unit">|</span>
           <span
-            className={`temp-unit ${isUnitCelsius ? null : "active-temp-unit"}`}
-            onClick={() => setIsUnitCelsius(false)}
+            className={`temp-unit ${isCelsius ? null : "active-temp-unit"}`}
+            onClick={() => setIsCelsius(false)}
           >
             {" "}
             °F
