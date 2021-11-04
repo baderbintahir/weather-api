@@ -5,7 +5,7 @@ const initialState = {
   searchTerm: "",
   searchResult: {},
   activeDay: 0,
-  coordinates: {}
+  searchedCoordinates: [73.04, 33.68]
 };
 
 export const searchSlice = createSlice({
@@ -13,9 +13,6 @@ export const searchSlice = createSlice({
   initialState,
   reducers: {
     changeCategory: (state, action) => {
-      if(action.payload === 'map'){
-        state.searchTerm = ''
-      }
       state.searchCategory = action.payload;
     },
     changeTerm: (state, action) => {
@@ -27,14 +24,14 @@ export const searchSlice = createSlice({
     changeActiveDay: (state, action) => {
       state.activeDay = action.payload;
     },
-    setCoordinates: (state, action) => {
-      state.coordinates = action.payload;
+    changeSearchedCoordinates: (state, action) => {
+      state.searchedCoordinates = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { changeCategory, changeTerm, setData, changeActiveDay, setCoordinates } =
+export const { changeCategory, changeTerm, setData, changeActiveDay, changeSearchedCoordinates } =
   searchSlice.actions;
 
 export default searchSlice.reducer;

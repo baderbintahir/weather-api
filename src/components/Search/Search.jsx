@@ -1,41 +1,31 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCategory, changeTerm, setData } from "../../redux/searchState";
+import {
+  changeCategory,
+  changeSearchedCoordinates,
+  changeTerm,
+} from "../../redux/searchState";
 import "./Search.css";
 
-const apiKey = "c73aa228bfba692462f96e89080aa39a";
-
-const Search = () => {
-  const state = useSelector((state) => state.searchState);
+const Search = (props) => {
+  const { searchTerm, searchCategory } = useSelector((state) => state.searchState);
   const dispatch = useDispatch();
 
-  const isMap = state.searchCategory === "map" ? true : false;
-  let placeholder;
-
-  if (isMap) {
-    placeholder = "Zoom into the place for weather updates...";
-  } else {
-    placeholder = `Search ${
-      state.searchCategory !== "zip" ? "City" : "Zip Code"
-    }...`;
-  }
+  const geocodingUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchTerm}.json?access_token=pk.eyJ1IjoibXVoYW1tYWRiYWRlcm1hcGJveCIsImEiOiJja3ZqNnBwcDUyM2t4MnBxNTNiajZidWtqIn0.M9rRkkK5dOF4WwM9Thc21g`;
 
   const handleSubmit = () => {
-    let url;
+    const url = `http://api.openweathermap.org/data/2.5/forecast?${
+      searchCategory === "zip" ? "id" : "q"
+    }=${searchTerm}&units=metric&appid=`;
+    props.fetchData(url);
 
-    if (isMap) {
-      url = `http://api.openweathermap.org/data/2.5/forecast?lat=${state.coordinates.lat}&lon=${state.coordinates.lng}&units=metric&appid=${apiKey}`;
-    } else {
-      url = `http://api.openweathermap.org/data/2.5/forecast?${
-        state.searchCategory === "zip" ? "id" : "q"
-      }=${state.searchTerm}&units=metric&appid=${apiKey}`;
-    }
-
-    fetch(url)
+    fetch(geocodingUrl)
       .then((res) => res.json())
-      .then((res) => {
-        dispatch(setData(res));
-      });
+      .then((res) =>
+        dispatch(
+          changeSearchedCoordinates(res.features[0].geometry.coordinates)
+        )
+      );
   };
 
   return (
@@ -46,15 +36,15 @@ const Search = () => {
       >
         <option value="name">City Name</option>
         <option value="zip">Zip Code</option>
-        <option value="map">Map</option>
       </select>
 
       <input
         type="text"
         className="search-field"
-        disabled={isMap}
-        placeholder={placeholder}
-        value={state.searchTerm}
+        placeholder={`Search ${
+          searchCategory !== "zip" ? "City" : "Zip Code"
+        }...`}
+        value={searchTerm}
         onChange={(e) => dispatch(changeTerm(e.target.value))}
       />
 

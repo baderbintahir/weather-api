@@ -11,3 +11,8 @@
 .mapboxgl-control-container{
     display: none;
 }
+
+.mapboxgl-marker{
+    position: absolute;
+    top: 0;
+}

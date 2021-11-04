@@ -1,19 +1,31 @@
+import { useSelector, useDispatch } from "react-redux";
+import { setData } from "./redux/searchState";
 import Result from "./components/Result/Result";
 import Search from "./components/Search/Search";
-
-import "./App.css";
-import { useSelector } from "react-redux";
 import MapContainer from "./components/MapContainer/MapContainer";
+import "./App.css";
+
+const apiKey = "c73aa228bfba692462f96e89080aa39a";
 
 const App = () => {
-  const showResult = useSelector(state => state.searchState.searchResult.city) ? true : false
-  const showMap = useSelector(state => state.searchState.searchCategory) === "map" ? true : false
-  
+  const dispatch = useDispatch();
+  const showResult = useSelector((state) => state.searchState.searchResult.city)
+    ? true
+    : false;
+
+  const fetchData = (url) => {
+    fetch(`${url}${apiKey}`)
+      .then((res) => res.json())
+      .then((res) => {
+        dispatch(setData(res));
+      });
+  };
+
   return (
     <div className="App">
-      <Search />
-      {showResult ? <Result /> : null}      
-      {showMap ? <MapContainer /> : null}
+      <MapContainer fetchData={fetchData} />
+      <Search fetchData={fetchData} />
+      {showResult ? <Result /> : null}
     </div>
   );
 };

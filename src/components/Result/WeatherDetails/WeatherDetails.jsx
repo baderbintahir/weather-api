@@ -4,15 +4,15 @@ import { useSelector } from "react-redux";
 
 const WeatherDetails = (props) => {
   const [isCelsius, setIsCelsius] = useState(true);
-  const searchState = useSelector((state) => state.searchState);
-  const searchResult = searchState.searchResult;
-  const day = props.dateToDay(searchResult.list[searchState.activeDay * 8].dt_txt);
-  const weatherCondition = searchResult.list[searchState.activeDay * 8].weather[0].main;
-  const icon = searchResult.list[searchState.activeDay * 8].weather[0].icon;
-  const pressure = searchResult.list[searchState.activeDay * 8].main.pressure;
-  const humidity = searchResult.list[searchState.activeDay * 8].main.humidity;
-  const windSpeed = searchResult.list[searchState.activeDay * 8].wind.speed;
-  let temp = searchResult.list[searchState.activeDay * 8].main.temp;
+  const { searchResult, activeDay } = useSelector((state) => state.searchState);
+  const detailedResult = searchResult.list[activeDay * 8]
+  const day = props.dateToDay(detailedResult.dt_txt);
+  const weatherCondition = detailedResult.weather[0].main;
+  const icon = detailedResult.weather[0].icon;
+  const pressure = detailedResult.main.pressure;
+  const humidity = detailedResult.main.humidity;
+  const windSpeed = detailedResult.wind.speed;
+  let temp = detailedResult.main.temp;
   temp = isCelsius ? temp : ((temp * 9) / 5 + 32).toFixed(2);
 
   return (
