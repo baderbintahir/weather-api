@@ -53,8 +53,8 @@ const Search = () => {
         type="text"
         className="search-field"
         disabled={isMap}
-        value={isMap ? '' : null}
         placeholder={placeholder}
+        value={state.searchTerm}
         onChange={(e) => dispatch(changeTerm(e.target.value))}
       />
 

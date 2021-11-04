@@ -13,6 +13,9 @@ export const searchSlice = createSlice({
   initialState,
   reducers: {
     changeCategory: (state, action) => {
+      if(action.payload === 'map'){
+        state.searchTerm = ''
+      }
       state.searchCategory = action.payload;
     },
     changeTerm: (state, action) => {

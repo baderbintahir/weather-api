@@ -1,7 +1,7 @@
 .search-container {
   display: flex;
   justify-content: center;
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 select.dropdown-select {
@@ -21,8 +21,13 @@ select.dropdown-select {
   cursor: pointer;
 }
 
-.dropdown-select, .search-field, .search-btn{
+.dropdown-select, .search-field, .search-btn {
   border: 1px solid #d6d6d6;
+  background: white;
+}
+
+.dropdown-select:focus, .search-field:focus, .search-btn:focus {
+  outline: none;
 }
 
 .dropdown-select{

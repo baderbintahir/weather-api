@@ -18,7 +18,7 @@ const MapContainer = () => {
     });
 
     map.on("style.load", function () {
-      map.on("mousemove", function (e) {
+      map.on("click", function (e) {
         const coordinates = e.lngLat;
         dispatch(setCoordinates({
           lat: coordinates.lat,
