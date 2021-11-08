@@ -5,7 +5,7 @@ import Search from "./components/Search/Search";
 import MapContainer from "./components/MapContainer/MapContainer";
 import "./App.css";
 
-const apiKey = "c73aa228bfba692462f96e89080aa39a";
+const API_KEY = "c73aa228bfba692462f96e89080aa39a";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const App = () => {
     : false;
 
   const fetchData = (url) => {
-    fetch(`${url}${apiKey}`)
+    fetch(`${url}${API_KEY}`)
       .then((res) => res.json())
       .then((res) => {
         dispatch(setData(res));

@@ -22,11 +22,11 @@ const MapContainer = (props) => {
 
     map.on("style.load", function () {
       map.on("click", function (e) {
-        const {lat, lng} = e.lngLat;
+        const { lat, lng } = e.lngLat;
         const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=metric&appid=`;
         props.fetchData(url);
 
-        marker.setLngLat({lat, lng}).addTo(map);
+        marker.setLngLat({ lat, lng }).addTo(map);
       });
     });
   }, [props, searchedCoordinates]);
